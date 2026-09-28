@@ -90,7 +90,12 @@ CREATE USER oramon IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;   -- V$, GV$ and DBA_ views
 GRANT ALTER SYSTEM TO oramon;          -- optional: Ctrl+K (cancel statement / kill session)
+GRANT ADVISOR TO oramon;               -- optional, Tuning Pack only: SQL Tuning Advisor
 ```
+
+Checked with exactly these grants on 26ai: every screen works. The one exception is **Expand SQL** — it re-parses the
+statement as the monitoring account, so it needs `SELECT` on the tables the statement reads (grant them per table, or
+`SELECT ANY TABLE`). Without it that tab shows ORA-00942 and nothing else is affected.
 
 ## WebView2 Runtime
 

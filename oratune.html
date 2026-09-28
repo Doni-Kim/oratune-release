@@ -383,8 +383,11 @@
 GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;      <span class="c">-- V$ · GV$ · DBA_ 뷰 읽기</span>
 <span class="c">-- Ctrl+K (문장 취소 · 세션 Kill) 를 쓸 때만</span>
-GRANT ALTER SYSTEM TO oramon;</pre>
+GRANT ALTER SYSTEM TO oramon;
+<span class="c">-- Tuning Pack 이 있고 SQL Tuning Advisor 를 쓸 때만</span>
+GRANT ADVISOR TO oramon;</pre>
     <ul>
+        <li>26ai 에서 이 권한 그대로 모든 화면을 확인했습니다. 예외는 SQL 창의 <b>Expand SQL</b> 하나입니다 — 모니터링 계정으로 문장을 다시 파싱하므로 문장이 읽는 테이블에 대한 <code>SELECT</code> 가 필요합니다(테이블마다 GRANT, 또는 <code>SELECT ANY TABLE</code>). 없으면 그 탭만 ORA-00942 를 보입니다.</li>
         <li>권한이 없어 읽지 못한 절은 화면에 사유를 적고 나머지는 그대로 보입니다.</li>
         <li>Exadata 판별(<code>V$CELL</code>)을 읽지 못하면 일반 화면으로 뜹니다.</li>
     </ul>

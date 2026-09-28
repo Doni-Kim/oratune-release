@@ -83,7 +83,11 @@ CREATE USER oramon IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;   -- V$ · GV$ · DBA_ 뷰
 GRANT ALTER SYSTEM TO oramon;          -- 선택: Ctrl+K (문장 취소 · 세션 Kill)
+GRANT ADVISOR TO oramon;               -- 선택, Tuning Pack 이 있을 때만: SQL Tuning Advisor
 ```
+
+26ai 에서 이 권한 그대로 모든 화면을 확인했습니다. 예외는 **Expand SQL** 하나입니다 — 모니터링 계정으로 문장을 다시 파싱하므로
+문장이 읽는 테이블에 대한 `SELECT` 가 필요합니다(테이블마다 GRANT, 또는 `SELECT ANY TABLE`). 없으면 그 탭만 ORA-00942 를 보이고 나머지는 그대로입니다.
 
 ## WebView2 런타임
 
