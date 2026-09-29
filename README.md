@@ -53,9 +53,10 @@ The screenshots show a throwaway `shop` schema on a test database.
 - **Session detail** (`Enter`) — the statement, the plan it actually runs, waits, locks and the open transaction.
   `Ctrl+K` cancels the statement (18c+) or kills the session; `Ctrl+X` exports the session to Excel.
 - **SQL window** — from a session, Top SQL, or `Ctrl+F` with a SQL_ID: child cursors, the plan with coloured lines,
-  Object Info (every table the SQL uses — column types, implicit conversions that defeat an index, indexes, partitions,
-  compression, statistics), binds (substituted into the statement or as a DECLARE block), not-shared reasons, optimizer
-  environment, work areas, plan control with a PURGE script, and Expand SQL. `[Excel]` writes it all to one workbook.
+  plan history from AWR, Object Info (every table the SQL uses — column types, implicit conversions that defeat an index, indexes, partitions,
+  compression, statistics and their gathering history), binds (substituted into the statement or as a DECLARE block), not-shared reasons, optimizer
+  environment, work areas, statements that differ only in literals, plan control with a PURGE script and scripts to fix a plan
+  (baseline, SQL patch, SQL profile), Expand SQL, and the AWR and ASH reports for the SQL_ID. `[Excel]` writes it all to one workbook.
 - **Panels** — Server (`I`), Connections (`C`), Locks (`A`), Waits (`W`), Top SQL (`T`, with a delta mode), Storage (`D`).
 - **Alerts** — 11 rules (sessions near the limit, AAS above the cores, host CPU, waiting sessions, lock chain, idle in
   transaction, long statements, tablespace, temp, undo, recovery area) with your own thresholds.
@@ -91,6 +92,7 @@ GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;   -- V$, GV$ and DBA_ views
 GRANT ALTER SYSTEM TO oramon;          -- optional: Ctrl+K (cancel statement / kill session)
 GRANT ADVISOR TO oramon;               -- optional, Tuning Pack only: SQL Tuning Advisor
+GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oramon;  -- optional, Diagnostics Pack only: AWR Report and ASH Report in the SQL window
 ```
 
 Checked with exactly these grants on 26ai: every screen works. The one exception is **Expand SQL** — it re-parses the

@@ -49,8 +49,9 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
   Connections(`C`)는 트랜잭션을 연 채 쉬는 세션을 따로.
 - **세션 상세**(`Enter`) — 문장 · 실제로 도는 계획 · 대기 · 락 · 열린 트랜잭션. `Ctrl+K` 문장 취소(18c+) · 세션 Kill, `Ctrl+X` 세션 Excel.
 - **SQL 창** — 세션 · Top SQL · `Ctrl+F`(SQL_ID) 어디서 열어도 같은 모양: Child Cursors, 줄 색이 있는 실행 계획,
-  Object Info(SQL 이 쓰는 테이블 전부 — 컬럼 형 · 인덱스를 못 타게 하는 형 변환 · 인덱스 · 파티션 · 압축 · 통계),
-  Binds(값을 박은 문장 · DECLARE 블록), Not Shared Reasons, SQL Optimizer Env, Workarea, Plan control(PURGE 스크립트), Expand SQL. `[Excel]` 로 한 권에.
+  AWR 의 계획 이력(Plan history), Object Info(SQL 이 쓰는 테이블 전부 — 컬럼 형 · 인덱스를 못 타게 하는 형 변환 · 인덱스 · 파티션 · 압축 · 통계와 수집 이력),
+  Binds(값을 박은 문장 · DECLARE 블록), Not Shared Reasons, 리터럴만 다른 문장(Similar SQL), SQL Optimizer Env, Workarea,
+  Plan control(PURGE 스크립트 · 계획 고정 스크립트 — Baseline · SQL Patch · SQL Profile), Expand SQL, 이 SQL_ID 의 AWR · ASH 보고서. `[Excel]` 로 한 권에.
 - **패널** — Server(`I`) · Connections(`C`) · Locks(`A`) · Waits(`W`) · Top SQL(`T`, Δ 모드) · Storage(`D`).
 - **알림 11종** — 세션 한도 · AAS 가 코어 수 초과 · Host CPU · 대기 세션 · Lock chain · Idle in transaction · 오래 도는 문장 · 테이블스페이스 · Temp · Undo · Recovery area, 임계값은 직접.
 - **History** — `L` 로 로컬 SQLite 에 기록하고 `H` 로 메인 화면의 모든 값과 그 시각의 세션을 되짚어 봅니다.
@@ -84,6 +85,7 @@ GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;   -- V$ · GV$ · DBA_ 뷰
 GRANT ALTER SYSTEM TO oramon;          -- 선택: Ctrl+K (문장 취소 · 세션 Kill)
 GRANT ADVISOR TO oramon;               -- 선택, Tuning Pack 이 있을 때만: SQL Tuning Advisor
+GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oramon;  -- 선택, Diagnostics Pack 이 있을 때만: SQL 창의 AWR Report · ASH Report
 ```
 
 26ai 에서 이 권한 그대로 모든 화면을 확인했습니다. 예외는 **Expand SQL** 하나입니다 — 모니터링 계정으로 문장을 다시 파싱하므로
