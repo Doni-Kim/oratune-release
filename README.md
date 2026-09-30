@@ -57,6 +57,8 @@ The screenshots show a throwaway `shop` schema on a test database.
   compression, statistics and their gathering history), binds (substituted into the statement or as a DECLARE block), not-shared reasons, optimizer
   environment, work areas, statements that differ only in literals, plan control with a PURGE script and scripts to fix a plan
   (baseline, SQL patch, SQL profile), Expand SQL, and the AWR and ASH reports for the SQL_ID. `[Excel]` writes it all to one workbook.
+- **Performance report** (`Ctrl+R`, Diagnostics Pack) — a period of AWR as one HTML or PDF file, in English or Korean: summary with
+  automatic findings, load charts, waits, top SQL, ASH by hour, resources, storage growth, ADDM findings and the previous period side by side.
 - **Panels** — Server (`I`), Connections (`C`), Locks (`A`), Waits (`W`), Top SQL (`T`, with a delta mode), Storage (`D`).
 - **Alerts** — 11 rules (sessions near the limit, AAS above the cores, host CPU, waiting sessions, lock chain, idle in
   transaction, long statements, tablespace, temp, undo, recovery area) with your own thresholds.
