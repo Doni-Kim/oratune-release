@@ -30,6 +30,10 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
 |---|---|
 | ![Waits](screenshots/waits.jpg) | ![알림](screenshots/alerts.jpg) |
 
+| 성능 보고서 | Plan history |
+|---|---|
+| ![성능 보고서](screenshots/perf-report.jpg) | ![Plan history](screenshots/plan-history.jpg) |
+
 그림은 시험용 DB 의 임시 `shop` 스키마 장면입니다.
 
 ## 설치·설정

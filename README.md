@@ -31,6 +31,10 @@ Free to use, no strings attached.
 |---|---|
 | ![Waits](screenshots/waits.jpg) | ![Alerts](screenshots/alerts.jpg) |
 
+| Performance report | Plan history |
+|---|---|
+| ![Performance report](screenshots/perf-report.jpg) | ![Plan history](screenshots/plan-history.jpg) |
+
 The screenshots show a throwaway `shop` schema on a test database.
 
 ## Install
