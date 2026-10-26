@@ -61,7 +61,7 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
 - **패널** — Server(`I`) · Connections(`C`) · Locks(`A`) · Waits(`W`) · Top SQL(`T`, Δ 모드) · Storage(`D`).
 - **알림 11종** — 세션 한도 · AAS 가 코어 수 초과 · Host CPU · 대기 세션 · Lock chain · Idle in transaction · 오래 도는 문장 · 테이블스페이스 · Temp · Undo · Recovery area, 임계값은 직접.
 - **History** — `L` 로 로컬 SQLite 에 기록하고 `H` 로 메인 화면의 모든 값과 그 시각의 세션을 되짚어 봅니다.
-- **Admin Reference** — `F1` 의 둘째 탭. DBA 가 찾는 패키지 · 명령문 약 380개의 설명과 복사할 샘플.
+- **Admin Reference** — `F1` 의 둘째 탭. DBA 가 찾는 패키지 · 명령문 약 400개의 설명과 복사할 샘플.
 - **설정 화면**(`O`) · **테마 12종** · 접속이 끊기면 스스로 다시 붙습니다.
 
 함께 든 `oratune.html` 이 그림이 있는 전체 매뉴얼입니다.

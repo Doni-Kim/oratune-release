@@ -68,7 +68,7 @@ The screenshots show a throwaway `shop` schema on a test database.
   transaction, long statements, tablespace, temp, undo, recovery area) with your own thresholds.
 - **History** — press `L` to log every sample into a local SQLite file, then `H` to look back at every main-screen value
   and the sessions of any moment.
-- **Admin Reference** — the second `F1` tab: about 380 packages and statements a DBA looks up, with samples to copy.
+- **Admin Reference** — the second `F1` tab: about 400 packages and statements a DBA looks up, with samples to copy.
 - **Settings screen** (`O`), **12 themes**, and it reconnects by itself when the connection drops.
 
 The bundled `oratune.html` is the full manual with screenshots (in Korean).
