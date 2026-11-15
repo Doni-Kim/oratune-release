@@ -41,10 +41,9 @@ The screenshots show a throwaway `shop` schema on a test database.
 
 - Unzip, keep the folder together, and run `oratune.exe` (single-file publish).
 - No .NET install and no Oracle client needed — both are inside the executable.
-- The only thing to set up is a connection file next to the executable. The zip ships two, `oratuneNode1.json` and
-  `oratuneNode2.json` — one file per server. Watching a single server? Keep one and delete the other.
-  Either edit it (see below), or just run `oratune.exe` — when the values do not connect, a connection dialog opens with
-  them filled in. Once the connection has succeeded, what you typed is saved back (the password is stored encrypted).
+- The connection window opens first: add a server with **+ New** (host, port, service — or a Data source), user and
+  password, and press **Connect**. Connections and settings are kept in `oratune.db` next to the executable (passwords encrypted).
+- Coming from 1.x? Overwrite `oratune.exe` — the connection json files next to it are brought in on the first start (below).
 
 ## What it does
 
@@ -69,7 +68,11 @@ The screenshots show a throwaway `shop` schema on a test database.
 - **History** — press `L` to log every sample into a local SQLite file, then `H` to look back at every main-screen value
   and the sessions of any moment.
 - **Admin Reference** — the second `F1` tab: about 400 packages and statements a DBA looks up, with samples to copy.
-- **Settings screen** (`O`), **12 themes**, and it reconnects by itself when the connection drops.
+- **Connection window** (2.0) — saved connections on the left, the selected one on the right; **Test** connects, shows the
+  server version and disconnects without saving; **Connect** saves only after it connects.
+- **Top bar** (2.0) — the dot is blue while collecting (click to disconnect) and red while reconnecting or disconnected
+  (click to connect now); **Connection** switches to another server without closing the window; GitHub opens this page.
+- **Settings screen** (`O`, per connection), **12 themes**, and it reconnects by itself when the connection drops.
 
 The bundled `oratune.html` is the full manual with screenshots (in Korean).
 
@@ -77,11 +80,7 @@ The bundled `oratune.html` is the full manual with screenshots (in Korean).
 
 Features that need the Oracle Diagnostics or Tuning Pack (ASH, AWR, SQL Monitor, SQL Tuning Advisor) are **off by default**,
 and while off, oratune never queries those views — querying them alone leaves a trace in `DBA_FEATURE_USAGE_STATISTICS`.
-Turn them on in the connection file only if you are licensed:
-
-```json
-"packs": { "diagnostics": false, "tuning": false }
-```
+Turn them on per connection in the connection window (**Packs**) only if you are licensed.
 
 ## Requirements and limits
 
@@ -127,31 +126,22 @@ Errors are written to `oratune.log` next to the executable (the file only appear
   Microsoft.Data.Sqlite · ClosedXML · Hogimn.Sql.Formatter · Microsoft.Web.WebView2 · Microsoft.AspNetCore.Components.WebView.WindowsForms
 - Copyright notices and license texts of these bundled components: [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt) (also inside the zip)
 
-## Connection files (`oratuneNode1.json` …)
+## Connections and settings (`oratune.db`, 2.0)
 
-One file per server, any name works (`prod.json`, `dev.json` …). With two or more next to `oratune.exe`, oratune asks
-which one to use at startup. The chosen file is that run's settings: the encrypted password, window position and theme are saved to it.
+Everything oratune keeps lives in `oratune.db` next to `oratune.exe`: the connections, each connection's settings (interval,
+log retention, Top SQL, alerts, the sessions to log, packs) and the window position and theme. Settings are changed only in
+`O`. To update oratune, overwrite `oratune.exe`; to move to another PC, copy the folder. It holds the encrypted passwords —
+do not hand it to others.
 
-```json
-{
-  "databases": [
-    {
-      "userId": "oramon",
-      "password": "change-me",
-      "server": "127.0.0.1",
-      "port": "1521",
-      "serviceName": "ORCLPDB1",
-      "encryption": "accepted"
-    }
-  ],
-  "interval": 5
-}
-```
-
-- Write `password` in plain text — it is encrypted on the first run and stored back.
-- `serviceName` is preferred; `sid` is the old way, and `dataSource` takes a tnsnames alias, a SCAN address or a full descriptor.
-- `encryption` is Oracle Native Network Encryption: `accepted` (default) / `rejected` / `requested` / `required`.
-- `interval` is the collection interval in seconds, 3–60 (5 when left out). `oratune_sample_en.json` in the zip documents every setting.
+- **Host · Port · Service**, or **Data source** — a tnsnames alias, EZConnect or a whole descriptor (RAC SCAN, FAILOVER).
+  A tnsnames.ora entry can be pasted as `name = (DESCRIPTION=…)`; a descriptor connection shows its first `host:port/service`.
+- **Encryption** is Oracle Native Network Encryption: `accepted` (default) / `rejected` / `requested` / `required`.
+- Connecting to the CDB root with Host · Port · Service lets you pick the PDB to watch; Oracle below 12.2 is refused.
+- Only one oratune runs per folder. Switch servers with **Connection** on the top bar, or copy the folder to watch two at once.
+- **Coming from 1.x** — overwrite `oratune.exe` in the old folder. On the first start the connection files next to it
+  (`oratune.json`, `oratuneNode1.json` …) are read once, one connection per file, together with their settings and packs;
+  plain passwords are encrypted, and a connection that used a SID keeps working. The json files are neither changed nor
+  deleted — delete them yourself once you have checked. Templates whose password is still `<password>` are skipped.
 
 ## Terms
 

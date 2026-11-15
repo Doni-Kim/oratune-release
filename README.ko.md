@@ -40,9 +40,9 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
 
 - 압축을 풀고 폴더째 두고 `oratune.exe` 를 실행합니다(단일 파일).
 - .NET 설치도, Oracle 클라이언트도 필요 없습니다 — 둘 다 실행 파일 안에 있습니다.
-- 준비할 것은 실행 파일 옆의 접속 파일 하나입니다. zip 에 `oratuneNode1.json` · `oratuneNode2.json` 두 개가 있습니다 — 서버 하나에 파일 하나.
-  서버가 하나면 하나를 지우세요. 파일을 고치거나(아래) 그냥 실행하면 — 붙지 못할 때 값이 채워진 접속 창이 뜹니다.
-  붙은 뒤에 입력한 값을 파일에 저장합니다(비밀번호는 암호화).
+- 실행하면 접속 창이 먼저 뜹니다. **+ New** 로 서버를 더하고(호스트 · 포트 · 서비스, 또는 Data source) 사용자 · 비밀번호를 넣은 뒤 **Connect**.
+  접속과 설정은 실행 파일 옆 `oratune.db` 에 저장됩니다(비밀번호는 암호화).
+- 1.x 를 쓰셨다면 `oratune.exe` 만 덮어쓰세요 — 옆의 접속 json 을 처음 실행할 때 옮겨 옵니다(아래).
 
 ## 주요 기능
 
@@ -62,7 +62,9 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
 - **알림 11종** — 세션 한도 · AAS 가 코어 수 초과 · Host CPU · 대기 세션 · Lock chain · Idle in transaction · 오래 도는 문장 · 테이블스페이스 · Temp · Undo · Recovery area, 임계값은 직접.
 - **History** — `L` 로 로컬 SQLite 에 기록하고 `H` 로 메인 화면의 모든 값과 그 시각의 세션을 되짚어 봅니다.
 - **Admin Reference** — `F1` 의 둘째 탭. DBA 가 찾는 패키지 · 명령문 약 400개의 설명과 복사할 샘플.
-- **설정 화면**(`O`) · **테마 12종** · 접속이 끊기면 스스로 다시 붙습니다.
+- **접속 창**(2.0): 왼쪽은 저장한 접속, 오른쪽은 고른 접속. **Test** 는 붙어서 서버 판을 보이고 저장 없이 끊고, **Connect** 는 붙은 뒤에만 저장합니다.
+- **위 줄**(2.0): 점이 파랑이면 수집 중(누르면 끊음), 빨강이면 재접속 중 · 끊음(누르면 지금 다시 붙음). **Connection** 은 창을 닫지 않고 다른 서버로 바꾸고, GitHub 그림은 이 페이지를 엽니다.
+- **설정 화면**(`O`, 접속마다) · **테마 12종** · 접속이 끊기면 스스로 다시 붙습니다.
 
 함께 든 `oratune.html` 이 그림이 있는 전체 매뉴얼입니다.
 
@@ -70,11 +72,7 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
 
 Diagnostics · Tuning Pack 이 필요한 기능(ASH · AWR · SQL Monitor · SQL Tuning Advisor)은 **기본 꺼짐**이고,
 꺼져 있는 동안 그 뷰에는 쿼리를 한 번도 보내지 않습니다 — 조회만 해도 `DBA_FEATURE_USAGE_STATISTICS` 에 흔적이 남기 때문입니다.
-팩을 가진 경우에만 접속 파일에서 켜세요:
-
-```json
-"packs": { "diagnostics": false, "tuning": false }
-```
+팩을 가진 경우에만 접속 창의 **Packs** 에서 접속마다 켜세요.
 
 ## 지원 범위 · 제약사항
 
@@ -118,31 +116,20 @@ https://developer.microsoft.com/microsoft-edge/webview2/ 의 "Evergreen Standalo
   Microsoft.Data.Sqlite · ClosedXML · Hogimn.Sql.Formatter · Microsoft.Web.WebView2 · Microsoft.AspNetCore.Components.WebView.WindowsForms
 - 함께 배포하는 구성 요소의 저작권 고지와 라이선스 전문: [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt) (zip 에도 있습니다)
 
-## 접속 파일 예시 (`oratuneNode1.json` …)
+## 접속 · 설정 (`oratune.db`, 2.0)
 
-서버 하나에 파일 하나, 이름은 자유입니다(`prod.json` · `dev.json` …). 실행 파일 옆에 둘 이상이면 시작할 때 고르는 창이 뜹니다.
-고른 파일이 그 실행의 설정입니다 — 암호화한 비밀번호 · 창 위치 · 테마가 거기 저장됩니다.
+oratune 이 남기는 것은 모두 `oratune.exe` 옆의 `oratune.db` 하나에 있습니다 — 접속, 접속마다의 설정(수집 주기 · 로그 보관 · Top SQL ·
+알림 · 로그에 남길 세션 · 팩), 창 위치 · 테마. 설정은 `O` 에서만 고칩니다. 새 판으로 바꿀 때는 `oratune.exe` 만 덮어쓰고,
+다른 PC 로 옮길 때는 폴더째 복사합니다. 암호화된 비밀번호가 들어 있으니 다른 사람에게 그대로 넘기지 마세요.
 
-```json
-{
-  "databases": [
-    {
-      "userId": "oramon",
-      "password": "change-me",
-      "server": "127.0.0.1",
-      "port": "1521",
-      "serviceName": "ORCLPDB1",
-      "encryption": "accepted"
-    }
-  ],
-  "interval": 5
-}
-```
-
-- `password` 는 평문으로 적으면 처음 실행할 때 암호화해 다시 저장합니다.
-- `serviceName` 을 권합니다. `sid` 는 옛 방식, `dataSource` 는 tnsnames 별칭 · SCAN 주소 · 서술자 통째.
-- `encryption` 은 Oracle Native Network Encryption: `accepted`(기본) · `rejected` · `requested` · `required`.
-- `interval` 은 수집 주기(초), 3 ~ 60(없으면 5). zip 의 `oratune_sample_kr.json` 에 모든 설정의 설명이 있습니다.
+- **Host · Port · Service**, 또는 **Data source** — tnsnames 별칭 · EZConnect · 서술자 통째(RAC SCAN · FAILOVER).
+  tnsnames.ora 항목을 `이름 = (DESCRIPTION=…)` 째 붙여 넣어도 되고, 서술자 접속은 첫 `host:port/service` 로 보입니다.
+- **Encryption** 은 Oracle Native Network Encryption: `accepted`(기본) / `rejected` / `requested` / `required`.
+- Host · Port · Service 로 CDB 루트에 붙으면 볼 PDB 를 고릅니다. Oracle 12.2 미만은 막습니다.
+- 같은 폴더의 oratune 은 하나만 뜹니다. 서버는 위 줄의 **Connection** 으로 바꾸고, 둘을 동시에 보려면 폴더를 복사하세요.
+- **1.x 에서 올라오는 경우**: 옛 폴더에 `oratune.exe` 를 덮어쓰면, 처음 실행할 때 옆의 접속 파일(`oratune.json` · `oratuneNode1.json` …)을
+  한 번 읽어 파일마다 접속 하나로 그 파일의 설정 · 팩과 함께 옮깁니다. 평문 비밀번호는 암호화해 넣고, SID 로 붙던 접속도 그대로 붙습니다.
+  json 파일은 고치지도 지우지도 않습니다 — 확인한 뒤 직접 지우세요. 비밀번호가 `<password>` 그대로인 틀은 옮기지 않습니다.
 
 ## 사용 조건
 
