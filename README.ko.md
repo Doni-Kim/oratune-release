@@ -58,7 +58,7 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
   Plan control(PURGE 스크립트 · 계획 고정 스크립트 — Baseline · SQL Patch · SQL Profile), Expand SQL, 이 SQL_ID 의 AWR · ASH 보고서. `[Excel]` 로 한 권에.
 - **성능 보고서**(`Ctrl+R`, Diagnostics Pack) — AWR 의 한 기간을 HTML · PDF 한 파일로, 영어 · 한국어: 요약과 자동 소견 · 부하 그래프 · 대기 · Top SQL ·
   시간별 ASH · 자원 · 저장소 증가 · ADDM 소견 · 직전 같은 길이 구간과 비교.
-- **패널** — Server(`I`) · Connections(`C`) · Locks(`A`) · Waits(`W`) · Top SQL(`T`, Δ 모드) · Storage(`D`).
+- **패널** — Server(`I`) · Connections(`C`) · Locks(`A`) · Waits(`W`) · Top SQL(`T` — 실제 실행시간 순, 병렬 SQL은 SQL Monitor · ASH로 잰 값, Δ 모드) · Storage(`D`).
 - **알림 11종** — 세션 한도 · AAS 가 코어 수 초과 · Host CPU · 대기 세션 · Lock chain · Idle in transaction · 오래 도는 문장 · 테이블스페이스 · Temp · Undo · Recovery area, 임계값은 직접.
 - **History** — `L` 로 로컬 SQLite 에 기록하고 `H` 로 메인 화면의 모든 값과 그 시각의 세션을 되짚어 봅니다.
 - **Admin Reference** — `F1` 의 둘째 탭. DBA 가 찾는 패키지 · 명령문 약 400개의 설명과 복사할 샘플.

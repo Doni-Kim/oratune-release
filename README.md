@@ -62,7 +62,7 @@ The screenshots show a throwaway `shop` schema on a test database.
   (baseline, SQL patch, SQL profile), Expand SQL, and the AWR and ASH reports for the SQL_ID. `[Excel]` writes it all to one workbook.
 - **Performance report** (`Ctrl+R`, Diagnostics Pack) — a period of AWR as one HTML or PDF file, in English or Korean: summary with
   automatic findings, load charts, waits, top SQL, ASH by hour, resources, storage growth, ADDM findings and the previous period side by side.
-- **Panels** — Server (`I`), Connections (`C`), Locks (`A`), Waits (`W`), Top SQL (`T`, with a delta mode), Storage (`D`).
+- **Panels** — Server (`I`), Connections (`C`), Locks (`A`), Waits (`W`), Top SQL (`T` — sorted by how long statements actually ran, a parallel one measured from SQL Monitor or ASH; with a delta mode), Storage (`D`).
 - **Alerts** — 11 rules (sessions near the limit, AAS above the cores, host CPU, waiting sessions, lock chain, idle in
   transaction, long statements, tablespace, temp, undo, recovery area) with your own thresholds.
 - **History** — press `L` to log every sample into a local SQLite file, then `H` to look back at every main-screen value
