@@ -57,7 +57,7 @@ The screenshots show a throwaway `shop` schema on a test database.
   `Ctrl+K` cancels the statement (18c+) or kills the session; `Ctrl+X` exports the session to Excel.
 - **SQL window** — from a session, Top SQL, or `Ctrl+F` with a SQL_ID: child cursors, the plan with coloured lines,
   plan history from AWR, Object Info (every table the SQL uses — column types, implicit conversions that defeat an index, indexes, partitions,
-  compression, statistics and their gathering history), binds (substituted into the statement or as a DECLARE block), not-shared reasons, optimizer
+  compression, statistics and their gathering history), binds (substituted into the statement or as an OraLab `<Variables>` block), not-shared reasons, optimizer
   environment, work areas, statements that differ only in literals, plan control with a PURGE script and scripts to fix a plan
   (baseline, SQL patch, SQL profile), Expand SQL, and the AWR and ASH reports for the SQL_ID. `[Excel]` writes it all to one workbook.
 - **Performance report** (`Ctrl+R`, Diagnostics Pack) — a period of AWR as one HTML or PDF file, in English or Korean: summary with

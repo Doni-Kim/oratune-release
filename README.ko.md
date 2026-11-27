@@ -54,7 +54,7 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
 - **세션 상세**(`Enter`) — 문장 · 실제로 도는 계획 · 대기 · 락 · 열린 트랜잭션. `Ctrl+K` 문장 취소(18c+) · 세션 Kill, `Ctrl+X` 세션 Excel.
 - **SQL 창** — 세션 · Top SQL · `Ctrl+F`(SQL_ID) 어디서 열어도 같은 모양: Child Cursors, 줄 색이 있는 실행 계획,
   AWR 의 계획 이력(Plan history), Object Info(SQL 이 쓰는 테이블 전부 — 컬럼 형 · 인덱스를 못 타게 하는 형 변환 · 인덱스 · 파티션 · 압축 · 통계와 수집 이력),
-  Binds(값을 박은 문장 · DECLARE 블록), Not Shared Reasons, 리터럴만 다른 문장(Similar SQL), SQL Optimizer Env, Workarea,
+  Binds(값을 박은 문장 · OraLab의 `<Variables>` 블록), Not Shared Reasons, 리터럴만 다른 문장(Similar SQL), SQL Optimizer Env, Workarea,
   Plan control(PURGE 스크립트 · 계획 고정 스크립트 — Baseline · SQL Patch · SQL Profile), Expand SQL, 이 SQL_ID 의 AWR · ASH 보고서. `[Excel]` 로 한 권에.
 - **성능 보고서**(`Ctrl+R`, Diagnostics Pack) — AWR 의 한 기간을 HTML · PDF 한 파일로, 영어 · 한국어: 요약과 자동 소견 · 부하 그래프 · 대기 · Top SQL ·
   시간별 ASH · 자원 · 저장소 증가 · ADDM 소견 · 직전 같은 길이 구간과 비교.
