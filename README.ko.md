@@ -51,7 +51,9 @@ PC 에 Oracle 클라이언트도 필요 없습니다 — 관리 코드 드라이
   Exadata 에서는 Trend · Performance 가 스토리지 셀 지표로 바뀝니다.
 - **Blocked Chain** — Locks(`A`)가 `V$WAIT_CHAINS` 로 누가 누구를 막는지 트리로(RAC 전체를 한 번에). `F5` 는 막는 세션과 막힌 세션만,
   Connections(`C`)는 트랜잭션을 연 채 쉬는 세션을 따로.
-- **세션 상세**(`Enter`) — 문장 · 실제로 도는 계획 · 대기 · 락 · 열린 트랜잭션. `Ctrl+K` 문장 취소(18c+) · 세션 Kill, `Ctrl+X` 세션 Excel.
+- **세션 상세**(`Enter`) — 문장 · 실제로 도는 계획 · 대기 · 락 · 열린 트랜잭션. `Ctrl+X` 세션 Excel.
+- **병렬 문장**(2.3) — PX 서버가 몇 개, 몇 노드에 퍼져 있어도 QC 한 줄로: 문장 전체의 PGA · Temp, Elapsed 옆에 PX time(PX 서버들의 DB time 합),
+  세션 상세의 PX servers 절. RAC 에서 Host CPU · AAS 알림은 가장 바쁜 인스턴스로 판정합니다.
 - **SQL 창** — 세션 · Top SQL · `Ctrl+F`(SQL_ID) 어디서 열어도 같은 모양: Child Cursors, 줄 색이 있는 실행 계획,
   AWR 의 계획 이력(Plan history), Object Info(SQL 이 쓰는 테이블 전부 — 컬럼 형 · 인덱스를 못 타게 하는 형 변환 · 인덱스 · 파티션 · 압축 · 통계와 수집 이력),
   Binds(값을 박은 문장 · OraLab의 `<Variables>` 블록), Not Shared Reasons, 리터럴만 다른 문장(Similar SQL), SQL Optimizer Env, Workarea,
@@ -87,7 +89,6 @@ Diagnostics · Tuning Pack 이 필요한 기능(ASH · AWR · SQL Monitor · SQL
 CREATE USER oramon IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;   -- V$ · GV$ · DBA_ 뷰
-GRANT ALTER SYSTEM TO oramon;          -- 선택: Ctrl+K (문장 취소 · 세션 Kill)
 GRANT ADVISOR TO oramon;               -- 선택, Tuning Pack 이 있을 때만: SQL Tuning Advisor
 GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oramon;  -- 선택, Diagnostics Pack 이 있을 때만: SQL 창의 AWR Report · ASH Report
 ```

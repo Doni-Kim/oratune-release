@@ -53,8 +53,11 @@ The screenshots show a throwaway `shop` schema on a test database.
   values; top waits, and the session list. On Exadata the trends and counters switch to the storage cells.
 - **Blocked chain** — Locks (`A`) draws who blocks whom as a tree from `V$WAIT_CHAINS` (all RAC instances at once);
   `F5` shows blockers together with the sessions they block, and Connections (`C`) lists sessions idle with an open transaction.
-- **Session detail** (`Enter`) — the statement, the plan it actually runs, waits, locks and the open transaction.
-  `Ctrl+K` cancels the statement (18c+) or kills the session; `Ctrl+X` exports the session to Excel.
+- **Session detail** (`Enter`) — the statement, the plan it actually runs, waits, locks and the open transaction;
+  `Ctrl+X` exports the session to Excel.
+- **Parallel statements** (2.3) — one coordinator row however many PX servers on however many instances: PGA and Temp of the
+  whole statement, PX time (DB time of all its PX servers) next to Elapsed, and a PX servers section in the session detail.
+  On RAC the Host CPU and AAS alerts look at the busiest instance.
 - **SQL window** — from a session, Top SQL, or `Ctrl+F` with a SQL_ID: child cursors, the plan with coloured lines,
   plan history from AWR, Object Info (every table the SQL uses — column types, implicit conversions that defeat an index, indexes, partitions,
   compression, statistics and their gathering history), binds (substituted into the statement or as an OraLab `<Variables>` block), not-shared reasons, optimizer
@@ -95,7 +98,6 @@ Turn them on per connection in the connection window (**Packs**) only if you are
 CREATE USER oramon IDENTIFIED BY "...";
 GRANT CREATE SESSION TO oramon;
 GRANT SELECT_CATALOG_ROLE TO oramon;   -- V$, GV$ and DBA_ views
-GRANT ALTER SYSTEM TO oramon;          -- optional: Ctrl+K (cancel statement / kill session)
 GRANT ADVISOR TO oramon;               -- optional, Tuning Pack only: SQL Tuning Advisor
 GRANT EXECUTE ON SYS.DBMS_WORKLOAD_REPOSITORY TO oramon;  -- optional, Diagnostics Pack only: AWR Report and ASH Report in the SQL window
 ```
